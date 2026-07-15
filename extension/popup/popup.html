@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Misinformation Checker</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Misinformation Checker</h1>
+      <p class="tag">Heuristic assistant — verify independently.</p>
+    </header>
+
+    <section class="input-card">
+      <label for="claim">Claim to check</label>
+      <textarea
+        id="claim"
+        rows="4"
+        maxlength="1000"
+        placeholder="Highlight text on the page or paste a claim here (max 1000 chars)…"
+      ></textarea>
+      <div class="row">
+        <button id="grabSelection" class="btn btn-ghost" type="button">
+          Use page selection
+        </button>
+        <button id="checkBtn" class="btn btn-primary" type="button">Check</button>
+      </div>
+      <p id="inputError" class="error hidden"></p>
+    </section>
+
+    <section id="loading" class="state hidden">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Checking sources…</p>
+    </section>
+
+    <section id="error" class="state hidden">
+      <p class="error" id="errorMsg"></p>
+      <button id="retryBtn" class="btn btn-ghost" type="button">Retry</button>
+    </section>
+
+    <section id="result" class="hidden">
+      <div class="score-card">
+        <div class="score-num"><span id="scoreValue">–</span><span class="score-max">/100</span></div>
+        <div class="score-bar"><div id="scoreFill" class="score-fill"></div></div>
+        <div id="labelChip" class="chip">–</div>
+      </div>
+
+      <div class="warnings" id="warnings"></div>
+
+      <div class="block">
+        <h2>Explanation</h2>
+        <p id="explanation"></p>
+      </div>
+
+      <div class="block">
+        <h2>Evidence</h2>
+        <ul id="evidence" class="evidence"></ul>
+      </div>
+
+      <details class="debug">
+        <summary>How this score was built</summary>
+        <pre id="debug"></pre>
+      </details>
+
+      <p class="disclaimer" id="disclaimer"></p>
+    </section>
+
+    <script src="../lib/api.js"></script>
+    <script src="../lib/ui.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
